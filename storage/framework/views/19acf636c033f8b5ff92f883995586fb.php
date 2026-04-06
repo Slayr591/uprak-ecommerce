@@ -66,14 +66,7 @@
                 <input type="radio" name="payment_method" value="bank_transfer" checked class="accent-gray-900">
                 <div><p class="font-medium text-sm">Transfer Bank</p><p class="text-xs text-gray-400">Mandiri / BCA</p></div>
               </label>
-              <label class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-gray-900 has-[:checked]:border-gray-900 has-[:checked]:bg-gray-50">
-                <input type="radio" name="payment_method" value="ewallet" class="accent-gray-900">
-                <div><p class="font-medium text-sm">E-Wallet / QRIS</p><p class="text-xs text-gray-400">Dana, OVO, GoPay, LinkAja</p></div>
-              </label>
-              <label class="flex items-center gap-3 p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-gray-900 has-[:checked]:border-gray-900 has-[:checked]:bg-gray-50">
-                <input type="radio" name="payment_method" value="cod" class="accent-gray-900">
-                <div><p class="font-medium text-sm">Bayar di Tempat (COD)</p><p class="text-xs text-gray-400">Cash on Delivery</p></div>
-              </label>
+              
             </div>
           </div>
         </div>
