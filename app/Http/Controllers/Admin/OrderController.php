@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Order;
+
+class OrderController extends Controller
+{
+    public function index()
+    {
+        $orders = Order::with('user')
+            ->when(request('status'), fn($q) => $q->where('status', request('status')))
+            ->when(request('search'), fn($q) => $q->where('order_number','like','%'.request('search').'%'))
+            ->latest()->paginate(15);
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    public function show(Order $order)
+    {
+        $order->load('items.product','user');
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function updateStatus(\Illuminate\Http\Request $request, Order $order)
+    {
+        $request->validate(['status' => 'required|in:pending,paid,confirmed,shipped,completed,cancelled']);
+        $order->update(['status' => $request->status]);
+        return back()->with('success','Status pesanan diperbarui.');
+    }
+}
