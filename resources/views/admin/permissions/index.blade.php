@@ -38,15 +38,15 @@
                     </a>
                     @endforeach
                 </nav>
-                <div class="mt-auto p-4 border-t border-gray-100">
+                {{-- <div class="mt-auto p-4 border-t border-gray-100">
                     <div class="flex items-center gap-3">
                         <div class="w-9 h-9 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xs font-bold">{{ substr(auth()->user()->name,0,1) }}</div>
-                        <div>
+                        {{-- <div>
                             <p class="text-sm font-semibold text-gray-900">{{ auth()->user()->name }}</p>
                             <p class="text-xs text-gray-400">Super Admin</p>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
 
             {{-- Main content --}}

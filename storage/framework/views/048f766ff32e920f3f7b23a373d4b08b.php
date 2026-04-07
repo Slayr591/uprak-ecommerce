@@ -38,15 +38,7 @@
                     </a>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </nav>
-                <div class="mt-auto p-4 border-t border-gray-100">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xs font-bold"><?php echo e(substr(auth()->user()->name,0,1)); ?></div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-900"><?php echo e(auth()->user()->name); ?></p>
-                            <p class="text-xs text-gray-400">Super Admin</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             
