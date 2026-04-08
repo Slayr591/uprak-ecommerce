@@ -7,6 +7,7 @@ return [
     'env'             => env('APP_ENV', 'production'),
     'debug'           => (bool) env('APP_DEBUG', false),
     'url'             => env('APP_URL', 'http://localhost'),
+    'customer_service_whatsapp' => env('CUSTOMER_SERVICE_WHATSAPP', 'https://wa.me/6287823440877'),
     'timezone'        => 'Asia/Jakarta',
     'locale'          => 'id',
     'fallback_locale' => 'en',

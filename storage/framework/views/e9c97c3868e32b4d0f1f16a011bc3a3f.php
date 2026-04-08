@@ -1,18 +1,35 @@
 <?php $__env->startSection('title','Login - UKK E-Commerce'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-900 rounded-xl mb-4">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+<div class="min-h-screen bg-gray-50">
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+                <span class="font-bold">Store</span>
             </div>
-            <h1 class="text-2xl font-bold text-gray-900">UKK E-Commerce</h1>
-            <p class="text-gray-500 text-sm mt-1">Masuk ke akun Anda</p>
+            <nav class="flex items-center gap-6 text-sm">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Categories</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Support</a>
+            </nav>
         </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-            <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-            <form method="POST" action="<?php echo e(route('login')); ?>" class="space-y-5">
-                <?php echo csrf_field(); ?>
+    </header>
+    
+    <div class="flex items-center justify-center p-4 py-20">
+        <div class="w-full max-w-md">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-lg mb-4">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900">Welcome Back</h1>
+                    <p class="text-gray-500 text-sm mt-1">Masuk ke akun Anda untuk melanjutkan belanja</p>
+                </div>
+                <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                
+                
+                <form method="POST" action="<?php echo e(route('login')); ?>" class="space-y-4">
+                    <?php echo csrf_field(); ?>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
                     <input type="email" name="email" value="<?php echo e(old('email')); ?>" required
@@ -29,20 +46,18 @@
                     <input type="checkbox" name="remember" id="remember" class="rounded">
                     <label for="remember" class="text-sm text-gray-600">Ingat saya</label>
                 </div>
-                <button type="submit" class="w-full bg-gray-900 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-colors">
-                    Masuk
+                <button type="submit" class="w-full bg-black text-white py-3 rounded-lg text-sm font-semibold hover:bg-gray-900 transition-colors">
+                    Login
                 </button>
             </form>
             <p class="text-center text-sm text-gray-500 mt-6">
-                Belum punya akun? <a href="<?php echo e(route('register')); ?>" class="text-gray-900 font-semibold hover:underline">Daftar</a>
+                Belum punya akun? <a href="<?php echo e(route('register')); ?>" class="text-black font-semibold hover:underline">Daftar</a>
             </p>
         </div>
-        <div class="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-700 space-y-1">
-            <p class="font-semibold">Akun Demo:</p>
-            <p>Admin: admin@ukk.com / password</p>
-            <p>Staff: staff@ukk.com / password</p>
-            <p>User: user@ukk.com / password</p>
-        </div>
+    </div>
+    
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 text-xs text-gray-400">
+        © 2024 E-Commerce Store Platform. All rights reserved.
     </div>
 </div>
 <?php $__env->stopSection(); ?>

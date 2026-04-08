@@ -30,9 +30,9 @@
                 </div>
                 <nav class="p-3 space-y-1">
                     @foreach(['admin' => 'Administrator', 'staff' => 'Staff Member', 'user' => 'Registered User'] as $r => $label)
-                    <a href="{{ route('admin.permissions', $r) }}"
-                       class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors
-                              {{ $role === $r ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100' }}">
+                     <a href="{{ route('admin.permissions', $r) }}"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors
+                               {{ $role === $r ? 'bg-green-50 text-green-700 border border-green-200' : 'text-gray-600 hover:bg-gray-50' }}">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                         {{ $label }}
                     </a>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="flex gap-3">
                         <a href="{{ route('admin.permissions', $role) }}" class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">Discard</a>
-                        <button form="permission-form" type="submit" class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">Save Changes</button>
+                        <button form="permission-form" type="submit" class="px-4 py-2 bg-green-400 text-black rounded-lg text-sm font-semibold hover:bg-green-500 transition-colors">Save Changes</button>
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@
                                                     after:content-[''] after:absolute after:top-[2px] after:left-[2px]
                                                     after:bg-white after:border-gray-300 after:border after:rounded-full
                                                     after:h-5 after:w-5 after:transition-all
-                                                    peer-checked:bg-gray-900"></div>
+                                                    peer-checked:bg-green-500"></div>
                                     </label>
                                 </div>
                                 @endforeach

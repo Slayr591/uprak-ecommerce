@@ -12,6 +12,17 @@
     <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <h1 class="text-2xl font-bold text-gray-900 mb-6">Riwayat Pesanan</h1>
     <?php $__empty_1 = true; $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+    <?php
+      $trackingText = match($order->status) {
+        'pending' => 'Menunggu pembayaran dari Anda.',
+        'paid' => 'Pembayaran diterima, menunggu verifikasi.',
+        'confirmed' => 'Pesanan sedang disiapkan oleh tim kami.',
+        'shipped' => 'Paket sedang dalam perjalanan ke alamat Anda.',
+        'completed' => 'Paket sudah diterima. Pesanan selesai.',
+        'cancelled' => 'Pesanan dibatalkan.',
+        default => 'Status pesanan sedang diperbarui.',
+      };
+    ?>
     <div class="bg-white rounded-xl border border-gray-200 p-5 mb-4">
       <div class="flex items-center justify-between mb-3">
         <div>
@@ -32,6 +43,23 @@
       <div class="flex items-center justify-between">
         <p class="text-sm text-gray-500"><?php echo e($order->items->count()); ?> item &bull; <?php echo e($order->payment_status_label); ?></p>
         <p class="font-bold text-gray-900"><?php echo e($order->total_formatted); ?></p>
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
+        <p class="text-xs text-gray-500">Tracking: <?php echo e($trackingText); ?></p>
+        <div class="flex items-center gap-2">
+          <a href="<?php echo e(route('user.history.show', $order)); ?>" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50">Lihat Detail</a>
+
+          <?php if($order->status === 'shipped'): ?>
+          <form method="POST" action="<?php echo e(route('user.history.complete', $order)); ?>">
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PATCH'); ?>
+            <button type="submit" class="text-xs px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+              Paket Sudah Sampai
+            </button>
+          </form>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

@@ -11,6 +11,59 @@
   </header>
   <main class="max-w-3xl mx-auto px-6 py-8">
     @include('partials.alert')
+    @php
+      $trackingSteps = [
+        'pending' => 1,
+        'paid' => 2,
+        'confirmed' => 3,
+        'shipped' => 4,
+        'completed' => 5,
+      ];
+
+      $currentStep = $trackingSteps[$order->status] ?? 0;
+
+      $trackingMessage = match($order->status) {
+        'pending' => 'Menunggu pembayaran Anda.',
+        'paid' => 'Pembayaran diterima dan sedang diverifikasi.',
+        'confirmed' => 'Pesanan sudah dikonfirmasi dan sedang diproses.',
+        'shipped' => 'Paket sedang dikirim ke alamat tujuan.',
+        'completed' => 'Paket sudah diterima. Pesanan selesai.',
+        'cancelled' => 'Pesanan dibatalkan.',
+        default => 'Status pesanan sedang diperbarui.',
+      };
+    @endphp
+
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-4">
+      <h3 class="font-semibold mb-3">Tracking Paket</h3>
+      <p class="text-sm text-gray-600 mb-4">{{ $trackingMessage }}</p>
+
+      @if($order->status !== 'cancelled')
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+        @foreach([
+          1 => 'Pesanan Dibuat',
+          2 => 'Pembayaran Masuk',
+          3 => 'Diproses',
+          4 => 'Dikirim',
+          5 => 'Selesai',
+        ] as $step => $label)
+          <div class="rounded-lg border px-3 py-2 {{ $currentStep >= $step ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-gray-200 bg-gray-50 text-gray-400' }}">
+            {{ $label }}
+          </div>
+        @endforeach
+      </div>
+      @endif
+
+      @if($order->status === 'shipped')
+      <form method="POST" action="{{ route('user.history.complete', $order) }}" class="mt-4">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700">
+          Konfirmasi Paket Sudah Sampai
+        </button>
+      </form>
+      @endif
+    </div>
+
     <div class="bg-white rounded-xl border border-gray-200 p-6 mb-4">
       <div class="flex items-center justify-between mb-4">
         <h2 class="font-bold text-gray-900">Detail Pesanan</h2>

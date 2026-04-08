@@ -30,12 +30,12 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// ─── USER (role: user) ────────────────────────────────────────────────────────
-Route::middleware(['auth', 'role:user'])->group(function () {
+// ─── USER CATALOG (public) ───────────────────────────────────────────────────
+Route::get('/products',           [ProductController::class, 'index'])->name('user.products');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('user.products.show');
 
-    // Products
-    Route::get('/products',          [ProductController::class, 'index'])->name('user.products');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('user.products.show');
+// ─── USER TRANSACTION (role: user) ───────────────────────────────────────────
+Route::middleware(['auth', 'role:user'])->group(function () {
 
     // Cart
     Route::get('/cart',                      [CartController::class, 'index'])->name('cart');
@@ -56,6 +56,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     // Order History
     Route::get('/history',          [UserOrderController::class, 'index'])->name('user.history');
     Route::get('/history/{order}',  [UserOrderController::class, 'show'])->name('user.history.show');
+    Route::patch('/history/{order}/complete', [UserOrderController::class, 'complete'])->name('user.history.complete');
 });
 
 // ─── ADMIN (role: admin) ──────────────────────────────────────────────────────
