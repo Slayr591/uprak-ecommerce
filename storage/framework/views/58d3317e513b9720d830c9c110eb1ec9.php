@@ -1,19 +1,20 @@
 
 <?php $__env->startSection('title','Staff - Admin'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <h2 class="text-lg font-semibold">Staff Management</h2>
+        <h2 class="text-[42px] font-extrabold tracking-tight">Staff Management</h2>
         <div class="relative">
           <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <input type="text" placeholder="Search staff members..." class="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-sm w-72 focus:outline-none">
+          <input type="text" placeholder="Search staff members..." class="ui-input pl-10 w-72">
         </div>
       </div>
       <div class="flex items-center gap-4">
-        <a href="<?php echo e(route('admin.staff.create')); ?>" class="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-900">
+        <a href="<?php echo e(route('admin.staff.create')); ?>" class="btn-dark !h-10">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
           Add New Staff
         </a>
@@ -30,7 +31,7 @@
       <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
       
       <div class="grid grid-cols-3 gap-6 mb-6">
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <div class="flex items-center justify-between mb-2">
             <p class="text-sm text-gray-500">Total Staff</p>
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
@@ -38,7 +39,7 @@
           <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e($staff->total() ?? 42); ?></p>
           <p class="text-xs text-green-500">+2% from last month</p>
         </div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <div class="flex items-center justify-between mb-2">
             <p class="text-sm text-gray-500">Active Now</p>
             <span class="w-3 h-3 bg-green-400 rounded-full"></span>
@@ -46,7 +47,7 @@
           <p class="text-2xl font-bold text-gray-900 mb-1">18</p>
           <p class="text-xs text-gray-400">Internal team currently logged in</p>
         </div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <div class="flex items-center justify-between mb-2">
             <p class="text-sm text-gray-500">Pending Invites</p>
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -66,9 +67,9 @@
         </div>
       </div>
       
-      <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="ui-card overflow-hidden">
         <table class="w-full">
-          <thead><tr class="bg-gray-50 text-xs font-semibold text-gray-500 uppercase">
+          <thead><tr class="bg-[#f7f8fa] text-xs font-extrabold text-gray-500 uppercase">
             <th class="text-left px-6 py-3">MEMBER</th>
             <th class="text-left px-6 py-3">EMAIL</th>
             <th class="text-left px-6 py-3">ROLE</th>
@@ -115,6 +116,7 @@
         <div class="px-6 py-4 border-t"><?php echo e($staff->links()); ?></div>
       </div>
     </main>
+  </div>
   </div>
 </div>
 <?php $__env->stopSection(); ?>

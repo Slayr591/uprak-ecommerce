@@ -1,31 +1,32 @@
 
 <?php $__env->startSection('title','Produk - Staff'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   <?php echo $__env->make('partials.staff-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Manajemen Produk</h2>
-      <a href="<?php echo e(route('staff.products.create')); ?>" class="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700">
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-8 py-4 flex items-center justify-between">
+      <h2 class="text-[52px] font-extrabold tracking-tight">Staff Product Management</h2>
+      <a href="<?php echo e(route('staff.products.create')); ?>" class="btn-dark !h-11">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-        Tambah Produk
+        Add New Product
       </a>
     </header>
     <main class="flex-1 overflow-y-auto p-8">
       <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-      <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+      <div class="ui-card p-4 mb-4">
         <form method="GET" class="flex gap-3">
-          <input type="text" name="search" value="<?php echo e(request('search')); ?>" placeholder="Cari nama atau SKU..." class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
-          <select name="category" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
+          <input type="text" name="search" value="<?php echo e(request('search')); ?>" placeholder="Search products by name, SKU, or tag..." class="ui-input flex-1">
+          <select name="category" class="ui-input !w-[180px]">
             <option value="">Semua Kategori</option>
             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><option value="<?php echo e($cat); ?>" <?php echo e(request('category')==$cat?'selected':''); ?>><?php echo e($cat); ?></option><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </select>
-          <button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium">Cari</button>
+          <button type="submit" class="btn-dark !h-10">Cari</button>
         </form>
       </div>
-      <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="ui-card overflow-hidden">
         <table class="w-full">
-          <thead><tr class="bg-gray-50 text-xs font-semibold text-gray-500 uppercase">
+          <thead><tr class="bg-[#f7f8fa] text-xs font-extrabold text-[#6b7280] uppercase">
             <th class="text-left px-6 py-3">Produk</th><th class="text-left px-6 py-3">Kategori</th>
             <th class="text-left px-6 py-3">Harga</th><th class="text-left px-6 py-3">Stok</th><th class="text-left px-6 py-3">Aksi</th>
           </tr></thead>
@@ -43,7 +44,7 @@
               <td class="px-6 py-3 flex items-center gap-2">
                 <a href="<?php echo e(route('staff.products.edit',$p)); ?>" class="text-xs px-2 py-1 border border-gray-200 rounded-lg hover:bg-gray-50">Edit</a>
                 <form method="POST" action="<?php echo e(route('staff.products.destroy',$p)); ?>" onsubmit="return confirm('Hapus produk?')"><?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>
-                  <button class="text-xs px-2 py-1 border border-red-200 text-red-600 rounded-lg hover:bg-red-50">Hapus</button>
+                  <button class="text-xs px-2 py-1 border border-red-200 text-red-600 rounded-lg hover:bg-red-50">Delete</button>
                 </form>
               </td>
             </tr>
@@ -54,6 +55,7 @@
         <div class="px-6 py-4 border-t"><?php echo e($products->withQueryString()->links()); ?></div>
       </div>
     </main>
+  </div>
   </div>
 </div>
 <?php $__env->stopSection(); ?>

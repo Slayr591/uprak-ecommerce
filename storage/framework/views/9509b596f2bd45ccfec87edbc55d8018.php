@@ -1,27 +1,29 @@
 
 <?php $__env->startSection('title','Pengguna - Admin'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-      <input type="text" placeholder="Search users..." class="px-4 py-2 bg-gray-100 rounded-lg text-sm w-64 focus:outline-none">
-      <nav class="flex items-center gap-6 text-sm">
-        <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-gray-500 hover:text-gray-900">Dashboard</a>
-        <a href="<?php echo e(route('admin.products.index')); ?>" class="text-gray-500 hover:text-gray-900">Products</a>
-        <a href="<?php echo e(route('admin.orders.index')); ?>" class="text-gray-500 hover:text-gray-900">Orders</a>
-        <a href="<?php echo e(route('admin.users.index')); ?>" class="text-black font-medium border-b-2 border-black pb-1">Users</a>
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-6 py-3 flex items-center justify-between">
+      <input type="text" placeholder="Search users..." class="ui-input max-w-[300px]">
+      <nav class="flex items-center gap-8 text-sm font-medium text-[#717785]">
+        <a href="<?php echo e(route('admin.users.index')); ?>" class="text-black font-bold border-b-2 border-black pb-1">Users</a>
+        <a href="<?php echo e(route('admin.products.index')); ?>">Inventory</a>
+        <a href="<?php echo e(route('admin.orders.index')); ?>">Orders</a>
+        <a href="<?php echo e(route('admin.permissions')); ?>">Settings</a>
+        <button type="button" onclick="document.getElementById('logout-modal').classList.remove('hidden')" class="btn-dark !h-9 !px-5">Logout</button>
       </nav>
     </header>
     <main class="flex-1 overflow-y-auto p-8">
       <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-      <div class="px-8 pt-8">
+      <div class="max-w-5xl mx-auto">
         <div class="flex items-center justify-between mb-6">
           <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">User Management</h1>
-            <p class="text-gray-500">Review and manage platform access permissions and account statuses.</p>
+            <h1 class="text-[50px] font-extrabold tracking-tight text-[#111827] mb-1">User Management</h1>
+            <p class="text-[#697180]">Review and manage platform access permissions and account statuses.</p>
           </div>
-          <a href="<?php echo e(route('admin.users.create')); ?>" class="flex items-center gap-2 bg-black text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-900">
+          <a href="<?php echo e(route('admin.users.create')); ?>" class="btn-dark !h-11 !px-6">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             Create New User
           </a>
@@ -33,9 +35,9 @@
           <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Staff Only</button>
           <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Standard Users</button>
         </div>
-      <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="ui-card overflow-hidden">
         <table class="w-full">
-          <thead><tr class="bg-gray-50 text-xs font-semibold text-gray-500 uppercase">
+          <thead><tr class="bg-[#f7f8fa] text-xs font-extrabold text-[#6b7280] uppercase">
             <th class="text-left px-6 py-3">USER PROFILE</th>
             <th class="text-left px-6 py-3">ROLE</th>
             <th class="text-left px-6 py-3">ACCOUNT STATUS</th>
@@ -45,9 +47,9 @@
           <tbody class="divide-y divide-gray-100">
             <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 bg-white">
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white text-sm font-bold"><?php echo e(substr($user->name,0,2)); ?></div>
+                  <div class="w-10 h-10 bg-[#e9ebef] rounded-full flex items-center justify-center text-[#111827] text-sm font-bold"><?php echo e(substr($user->name,0,2)); ?></div>
                   <div>
                     <p class="text-sm font-semibold text-gray-900"><?php echo e($user->name); ?></p>
                     <p class="text-xs text-gray-400"><?php echo e($user->email); ?></p>
@@ -95,7 +97,9 @@
         </table>
         <div class="px-6 py-4 border-t"><?php echo e($users->withQueryString()->links()); ?></div>
       </div>
+      </div>
     </main>
+  </div>
   </div>
 </div>
 <?php $__env->stopSection(); ?>

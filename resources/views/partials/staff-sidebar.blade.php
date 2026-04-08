@@ -1,41 +1,55 @@
-<aside class="w-64 bg-black border-r border-gray-800 flex flex-col flex-shrink-0 h-screen sticky top-0">
-    <div class="p-6 flex items-center gap-3 border-b border-gray-800">
-        <div class="w-8 h-8 bg-green-400 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+<aside class="w-[250px] bg-[#02050b] border-r border-[#111827] flex flex-col flex-shrink-0">
+    <div class="px-5 py-6 border-b border-[#101a2a] flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-[#8cf5d2] text-[#042218] flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
-        <h1 class="text-lg font-bold text-white">STAFF<span class="text-green-400">PORTAL</span></h1>
+        <p class="text-[30px] leading-none text-white font-extrabold tracking-tight">STAFF <span class="text-[#8cf5d2]">PORTAL</span></p>
     </div>
-    <nav class="flex-1 p-4 space-y-1">
-        <a href="{{ route('staff.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium {{ request()->routeIs('staff.dashboard') ? 'bg-green-400 text-black' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+
+    <nav class="flex-1 px-3 py-4 overflow-y-auto space-y-1.5">
+        <a href="{{ route('staff.dashboard') }}" class="admin-side-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M4.5 10.5V21h5.25v-6h4.5v6h5.25V10.5"/></svg>
             Dashboard
         </a>
-        <a href="{{ route('staff.products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium {{ request()->routeIs('staff.products.*') ? 'bg-green-400 text-black' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-            Produk
+        <a href="{{ route('staff.products.index') }}" class="admin-side-link {{ request()->routeIs('staff.products.*') ? 'active' : '' }}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7l8-4 8 4-8 4-8-4zm0 5l8 4 8-4m-16 5l8 4 8-4"/></svg>
+            Product Management
         </a>
-        <a href="{{ route('staff.payments.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium {{ request()->routeIs('staff.payments.*') ? 'bg-green-400 text-black' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Konfirmasi Pembayaran
+        <a href="{{ route('staff.payments.index') }}" class="admin-side-link {{ request()->routeIs('staff.payments.*') ? 'active' : '' }}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Payment Confirmation
         </a>
-        <a href="{{ route('staff.orders.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium {{ request()->routeIs('staff.orders.*') ? 'bg-green-400 text-black' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            Pesanan
+        <a href="{{ route('staff.orders.index') }}" class="admin-side-link {{ request()->routeIs('staff.orders.*') ? 'active' : '' }}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h10m-10 4h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+            Orders
         </a>
-    </nav>
-    <div class="p-4 border-t border-gray-800">
-        <div class="flex items-center gap-3 mb-3">
-            <div class="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center text-black text-xs font-bold">{{ substr(auth()->user()->name,0,1) }}</div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-semibold text-white truncate">{{ auth()->user()->name }}</p>
-                <p class="text-xs text-gray-400">Staff Lead</p>
-            </div>
+
+        <div class="pt-3">
+            <p class="px-3 pb-1 text-[10px] uppercase tracking-[0.16em] text-[#4f5b70] font-bold">System Maintenance</p>
+            <a href="javascript:void(0)" class="admin-side-link opacity-60 cursor-not-allowed">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 7.5A2.25 2.25 0 016 5.25h12A2.25 2.25 0 0120.25 7.5v9A2.25 2.25 0 0118 18.75H6A2.25 2.25 0 013.75 16.5v-9zm4.5 2.25h7.5"/></svg>
+                Backup & Restore
+            </a>
         </div>
-        <form method="POST" action="{{ route('logout') }}">@csrf
-            <button type="submit" class="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                Keluar
+    </nav>
+
+    <div class="border-t border-[#101a2a] p-4">
+        <div class="rounded-xl border border-[#142235] bg-[#050913] p-3.5">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-full bg-[#8cf5d2] text-[#04140d] flex items-center justify-center font-extrabold text-xs">{{ strtoupper(substr(auth()->user()->name,0,1)) }}</div>
+                <div class="min-w-0">
+                    <p class="text-sm font-semibold text-white truncate">{{ auth()->user()->name }}</p>
+                    <p class="text-[11px] uppercase tracking-wide text-[#7f8ea3]">Staff Lead</p>
+                </div>
+            </div>
+            <button type="button"
+                    onclick="document.getElementById('logout-modal').classList.remove('hidden')"
+                    class="w-full h-9 rounded-lg border border-[#16263b] bg-[#0a1220] text-[#8b98ac] text-xs font-semibold hover:text-white hover:bg-[#111d31] transition">
+                Logout
             </button>
-        </form>
+        </div>
     </div>
 </aside>
+
+
+

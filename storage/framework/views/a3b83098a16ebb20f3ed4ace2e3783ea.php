@@ -1,12 +1,13 @@
 
 <?php $__env->startSection('title','Backup & Restore - Admin'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50 overflow-hidden">
+<div class="app-viewport">
+    <div class="app-canvas">
     <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
         
-        <header class="bg-white border-b border-gray-200 px-8 h-16 flex items-center justify-between flex-shrink-0">
+        <header class="bg-[#fbfbfc] border-b border-[#dfe3e8] px-8 h-16 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center gap-2 text-sm">
                 <a href="<?php echo e(route('admin.dashboard')); ?>" class="flex items-center gap-1 text-gray-400 hover:text-gray-700">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -16,7 +17,7 @@
                 <span class="font-semibold text-gray-900">Backup & Restore</span>
             </div>
             <div class="flex items-center gap-3">
-                <input type="text" placeholder="Search backups..." class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 w-48">
+                <input type="text" placeholder="Search backups..." class="ui-input !h-9 w-56">
                 <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
             </div>
         </header>
@@ -27,12 +28,12 @@
             
             <div class="flex items-start justify-between mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Backup & Restore</h1>
+                    <h1 class="text-[52px] font-extrabold tracking-tight text-gray-900">Backup & Restore</h1>
                     <p class="text-gray-500 mt-1">Safeguard your e-commerce data. Manage snapshots and disaster recovery points.</p>
                 </div>
                 <form method="POST" action="<?php echo e(route('admin.backup.create')); ?>">
                     <?php echo csrf_field(); ?>
-                    <button type="submit" class="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <button type="submit" class="btn-mint !h-11 !px-6">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                         Backup Database Now
                     </button>
@@ -41,7 +42,7 @@
 
             
             <div class="grid grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                <div class="ui-card p-6">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
                         <p class="text-sm text-gray-500 font-medium">Total Backups</p>
@@ -49,7 +50,7 @@
                     <p class="text-4xl font-bold text-gray-900"><?php echo e($stats['total_backups']); ?></p>
                     <p class="text-xs text-gray-400 mt-2">Storage Capacity: <?php echo e($stats['storage_capacity']); ?></p>
                 </div>
-                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                <div class="ui-card p-6">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
                         <p class="text-sm text-gray-500 font-medium">Storage Used</p>
@@ -57,7 +58,7 @@
                     <p class="text-4xl font-bold text-gray-900"><?php echo e($stats['storage_used']); ?></p>
                     <p class="text-xs text-gray-400 mt-2">Daily growth: <?php echo e($stats['daily_growth']); ?></p>
                 </div>
-                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                <div class="ui-card p-6">
                     <div class="flex items-center gap-3 mb-3">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         <p class="text-sm text-gray-500 font-medium">Next Scheduled</p>
@@ -71,7 +72,7 @@
             </div>
 
             
-            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8">
+            <div class="ui-card overflow-hidden mb-8">
                 <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                     <h2 class="text-lg font-bold text-gray-900">Backup History</h2>
                     <div class="flex gap-2">
@@ -86,7 +87,7 @@
 
                 <table class="w-full">
                     <thead>
-                        <tr class="bg-gray-50 border-b border-gray-200">
+                        <tr class="bg-[#f7f8fa] border-b border-gray-200">
                             <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Timestamp</th>
                             <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Backup Name</th>
                             <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">File Size</th>
@@ -151,22 +152,22 @@
             </div>
 
             
-            <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="rounded-xl border border-gray-900 bg-black text-white p-6">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
                         <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-                            <h3 class="font-bold text-gray-900">Automated Cloud Sync</h3>
+                            <svg class="w-5 h-5 text-[#7eeac2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                            <h3 class="font-bold text-white">Automated Cloud Sync</h3>
                         </div>
-                        <p class="text-sm text-gray-500 max-w-xl">Enable real-time syncing to Amazon S3 or Google Cloud Storage for off-site disaster recovery.</p>
+                        <p class="text-sm text-gray-300 max-w-xl">Enable real-time syncing to Amazon S3 or Google Cloud Storage for off-site disaster recovery.</p>
                         <div class="mt-3">
-                            <div class="w-32 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="w-32 h-1.5 bg-[#1f2937] rounded-full overflow-hidden">
                                 <div class="h-full bg-emerald-500 rounded-full" style="width:65%"></div>
                             </div>
-                            <p class="text-xs text-gray-400 mt-1">Status: <span class="text-emerald-600 font-medium">Active</span></p>
+                            <p class="text-xs text-gray-400 mt-1">Status: <span class="text-[#7eeac2] font-medium">Active</span></p>
                         </div>
                     </div>
-                    <button class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex-shrink-0">
+                    <button class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 transition-colors flex-shrink-0">
                         Configure Storage
                     </button>
                 </div>
@@ -176,6 +177,7 @@
         <footer class="bg-white border-t border-gray-200 px-8 py-3 flex-shrink-0">
             <p class="text-xs text-gray-400">© 2024 Admin System v4.12.0 · <a href="#" class="hover:underline">API Documentation</a> · <a href="#" class="hover:underline">Support</a> · System Status: <span class="text-emerald-600">Operational</span></p>
         </footer>
+    </div>
     </div>
 </div>
 <?php $__env->stopSection(); ?>

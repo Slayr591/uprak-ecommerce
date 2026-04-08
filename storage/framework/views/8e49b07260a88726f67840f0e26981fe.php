@@ -1,9 +1,9 @@
-@extends('layouts.app')
-@section('title','Staff - Admin')
-@section('content')
+
+<?php $__env->startSection('title','Staff - Admin'); ?>
+<?php $__env->startSection('content'); ?>
 <div class="app-viewport">
   <div class="app-canvas">
-  @include('partials.admin-sidebar')
+  <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
   <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
     <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-4">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="flex items-center gap-4">
-        <a href="{{ route('admin.staff.create') }}" class="btn-dark !h-10">
+        <a href="<?php echo e(route('admin.staff.create')); ?>" class="btn-dark !h-10">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
           Add New Staff
         </a>
@@ -28,7 +28,7 @@
       </div>
     </header>
     <main class="flex-1 overflow-y-auto p-8">
-      @include('partials.alert')
+      <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
       
       <div class="grid grid-cols-3 gap-6 mb-6">
         <div class="ui-card p-6">
@@ -36,7 +36,7 @@
             <p class="text-sm text-gray-500">Total Staff</p>
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
           </div>
-          <p class="text-2xl font-bold text-gray-900 mb-1">{{ $staff->total() ?? 42 }}</p>
+          <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e($staff->total() ?? 42); ?></p>
           <p class="text-xs text-green-500">+2% from last month</p>
         </div>
         <div class="ui-card p-6">
@@ -77,20 +77,20 @@
             <th class="text-left px-6 py-3">ACTIONS</th>
           </tr></thead>
           <tbody class="divide-y divide-gray-100">
-            @forelse($staff as $s)
+            <?php $__empty_1 = true; $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <tr class="hover:bg-gray-50">
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 text-xs font-bold">{{ substr($s->name,0,1) }}</div>
+                  <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 text-xs font-bold"><?php echo e(substr($s->name,0,1)); ?></div>
                   <div>
-                    <p class="text-sm font-semibold">{{ $s->name }}</p>
-                    <p class="text-xs text-gray-400">Joined {{ $s->created_at->format('M Y') }}</p>
+                    <p class="text-sm font-semibold"><?php echo e($s->name); ?></p>
+                    <p class="text-xs text-gray-400">Joined <?php echo e($s->created_at->format('M Y')); ?></p>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 text-sm text-gray-500">{{ $s->email }}</td>
+              <td class="px-6 py-4 text-sm text-gray-500"><?php echo e($s->email); ?></td>
               <td class="px-6 py-4">
-                <span class="text-xs px-2.5 py-1 rounded-full bg-gray-900 text-white font-medium">{{ $s->role ?? 'Super Admin' }}</span>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-gray-900 text-white font-medium"><?php echo e($s->role ?? 'Super Admin'); ?></span>
               </td>
               <td class="px-6 py-4">
                 <span class="inline-flex items-center gap-1.5">
@@ -99,24 +99,26 @@
                 </span>
               </td>
               <td class="px-6 py-4 flex items-center gap-2">
-                <a href="{{ route('admin.staff.edit',$s) }}" class="w-7 h-7 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50">
+                <a href="<?php echo e(route('admin.staff.edit',$s)); ?>" class="w-7 h-7 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50">
                   <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                 </a>
-                <form method="POST" action="{{ route('admin.staff.destroy',$s) }}" onsubmit="return confirm('Hapus staff ini?')">@csrf @method('DELETE')
+                <form method="POST" action="<?php echo e(route('admin.staff.destroy',$s)); ?>" onsubmit="return confirm('Hapus staff ini?')"><?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>
                   <button class="w-7 h-7 rounded border border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-200">
                     <svg class="w-3.5 h-3.5 text-gray-500 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                   </button>
                 </form>
               </td>
             </tr>
-            @empty<tr><td colspan="4" class="text-center py-12 text-gray-400">Belum ada staff.</td></tr>
-            @endforelse
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?><tr><td colspan="4" class="text-center py-12 text-gray-400">Belum ada staff.</td></tr>
+            <?php endif; ?>
           </tbody>
         </table>
-        <div class="px-6 py-4 border-t">{{ $staff->links() }}</div>
+        <div class="px-6 py-4 border-t"><?php echo e($staff->links()); ?></div>
       </div>
     </main>
   </div>
   </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\uprak-ecommerce\resources\views/admin/staff/index.blade.php ENDPATH**/ ?>

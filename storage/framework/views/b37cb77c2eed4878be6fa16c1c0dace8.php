@@ -1,15 +1,17 @@
 
 <?php $__env->startSection('title','Pembayaran - UKK E-Commerce'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="min-h-screen bg-gray-50">
-  <header class="bg-white border-b border-gray-200 px-6 py-4">
-    <span class="font-bold text-gray-900">Selesaikan Pembayaran</span>
+<div class="app-viewport">
+  <div class="app-canvas !block">
+  <header class="h-16 bg-[#fcfcfd] border-b border-[#e3e6eb] px-7 py-4 flex items-center justify-between">
+    <span class="text-[40px] font-extrabold tracking-tight text-[#0f172a]">Selesaikan Pembayaran</span>
+    <button type="button" onclick="document.getElementById('logout-modal').classList.remove('hidden')" class="btn-dark !h-10">Logout</button>
   </header>
-  <main class="max-w-4xl mx-auto px-6 py-8">
+  <main class="max-w-5xl mx-auto px-8 py-8">
     <?php echo $__env->make('partials.alert', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <div class="flex gap-8 items-start">
       <div class="flex-1">
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div class="ui-card p-6 mb-6">
           <h2 class="font-bold text-gray-900 mb-4">Informasi Rekening Tujuan</h2>
           <div class="grid grid-cols-3 gap-4 text-sm">
             <div><p class="text-gray-400 mb-1">Nama Bank</p><p class="font-semibold">Bank Mandiri (IDR)</p></div>
@@ -20,7 +22,7 @@
             Transfer tepat sesuai nominal termasuk 3 digit unik untuk verifikasi otomatis.
           </div>
         </div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <h2 class="font-bold text-gray-900 mb-4">Unggah Bukti Pembayaran</h2>
           <form method="POST" action="<?php echo e(route('payment.upload', $order->id)); ?>" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
@@ -34,20 +36,22 @@
           </form>
         </div>
       </div>
-      <div class="w-72 flex-shrink-0">
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 class="font-bold text-gray-900 mb-4">Ringkasan Pesanan</h2>
+      <div class="w-80 flex-shrink-0">
+        <div class="rounded-2xl bg-[#0d1938] text-white p-6 shadow-xl">
+          <h2 class="text-[34px] font-extrabold tracking-tight mb-4">Ringkasan Pesanan</h2>
           <div class="space-y-2 text-sm">
-            <div class="flex justify-between"><span class="text-gray-500">Order ID</span><span class="font-medium"><?php echo e($order->order_number); ?></span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Subtotal</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->subtotal)); ?></span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Ongkir</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->shipping_cost)); ?></span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Pajak</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->tax)); ?></span></div>
-            <div class="border-t pt-2 flex justify-between font-bold"><span>Total Bayar</span><span class="text-lg"><?php echo e($order->total_formatted); ?></span></div>
+            <div class="flex justify-between"><span class="text-[#c4cada]">Order ID</span><span class="font-medium"><?php echo e($order->order_number); ?></span></div>
+            <div class="flex justify-between"><span class="text-[#c4cada]">Subtotal</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->subtotal)); ?></span></div>
+            <div class="flex justify-between"><span class="text-[#c4cada]">Ongkir</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->shipping_cost)); ?></span></div>
+            <div class="flex justify-between"><span class="text-[#c4cada]">Pajak</span><span><?php echo e(\App\Helpers\CurrencyHelper::rupiah($order->tax)); ?></span></div>
+            <div class="border-t border-[#2a3b63] pt-2 flex justify-between font-bold"><span>Total Bayar</span><span class="text-2xl text-[#3df79f]"><?php echo e($order->total_formatted); ?></span></div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  <footer class="h-14 border-t border-[#e3e6eb] text-xs text-[#9aa1ad] flex items-center justify-center">© 2023 E-Commerce Platform. Seluruh Hak Cipta Dilindungi.</footer>
+  </div>
 </div>
 <?php $__env->stopSection(); ?>
 

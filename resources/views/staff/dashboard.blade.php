@@ -1,42 +1,56 @@
 @extends('layouts.app')
 @section('title','Dashboard - Staff')
 @section('content')
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   @include('partials.staff-sidebar')
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-8 py-4"><h2 class="text-lg font-semibold">Dashboard Staff</h2></header>
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <p class="text-sm text-[#7c8492]">Staff</p>
+        <span class="text-[#d1d5db]">/</span>
+        <h2 class="text-lg font-extrabold text-[#111827]">Dashboard Overview</h2>
+      </div>
+      <a href="{{ route('staff.products.create') }}" class="btn-dark !h-10">+ NEW PRODUCT</a>
+    </header>
     <main class="flex-1 overflow-y-auto p-8">
       @include('partials.alert')
-      <div class="grid grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-xl border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">Menunggu Konfirmasi</p><p class="text-3xl font-bold text-amber-600">{{ $stats['pending_payments'] }}</p><a href="{{ route('staff.payments.index') }}" class="text-xs text-gray-400 hover:underline">Lihat semua</a></div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">Diproses Hari Ini</p><p class="text-2xl font-bold text-gray-900">{{ \App\Helpers\CurrencyHelper::rupiah($stats['processed_today']) }}</p></div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">Total Produk</p><p class="text-3xl font-bold text-gray-900">{{ $stats['total_products'] }}</p></div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">Stok Rendah</p><p class="text-3xl font-bold text-amber-600">{{ $stats['low_stock'] }}</p></div>
+      <h1 class="text-[52px] font-extrabold tracking-tight text-[#111827] leading-none mb-2">DASHBOARD OVERVIEW</h1>
+      <p class="text-[#697180] mb-6">Real-time performance metrics and system activity.</p>
+
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="ui-card p-5"><p class="text-xs text-[#6b7280] uppercase font-bold">Total Products</p><p class="text-5xl font-extrabold text-[#111827] mt-2">{{ $stats['total_products'] }}</p></div>
+        <div class="ui-card p-5"><p class="text-xs text-[#6b7280] uppercase font-bold">Today's Orders</p><p class="text-5xl font-extrabold text-[#111827] mt-2">{{ $stats['pending_payments'] }}</p></div>
+        <div class="ui-card p-5"><p class="text-xs text-[#6b7280] uppercase font-bold">Pending Payments</p><p class="text-5xl font-extrabold text-[#111827] mt-2">{{ $stats['pending_payments'] }}</p></div>
+        <div class="rounded-xl bg-[#191c21] p-5"><p class="text-xs text-[#9ca3af] uppercase font-bold">Total Revenue</p><p class="text-4xl font-extrabold text-white mt-2">{{ \App\Helpers\CurrencyHelper::rupiah($stats['processed_today']) }}</p></div>
       </div>
-      <div class="bg-white rounded-xl border border-gray-200">
+
+      <div class="ui-card overflow-hidden">
         <div class="px-6 py-4 border-b flex items-center justify-between">
-          <h3 class="font-semibold">Pembayaran Menunggu Konfirmasi</h3>
-          <a href="{{ route('staff.payments.index') }}" class="text-sm text-gray-500 hover:underline">Lihat semua</a>
+          <h3 class="text-[30px] font-extrabold tracking-tight text-[#111827]">RECENT ACTIVITY</h3>
+          <a href="{{ route('staff.payments.index') }}" class="text-xs font-bold text-[#7eeac2]">VIEW ALL LOGS</a>
         </div>
         <table class="w-full">
-          <thead><tr class="bg-gray-50 text-xs font-semibold text-gray-500 uppercase">
-            <th class="text-left px-6 py-3">Order</th><th class="text-left px-6 py-3">Pelanggan</th>
-            <th class="text-left px-6 py-3">Total</th><th class="text-left px-6 py-3">Aksi</th>
+          <thead><tr class="bg-[#f7f8fa] text-xs font-bold text-[#6b7280] uppercase">
+            <th class="text-left px-6 py-3">ID</th><th class="text-left px-6 py-3">TIMESTAMP</th>
+            <th class="text-left px-6 py-3">ACTION</th><th class="text-left px-6 py-3">STAFF MEMBER</th><th class="text-left px-6 py-3">STATUS</th>
           </tr></thead>
           <tbody class="divide-y divide-gray-100">
             @forelse($recentOrders as $order)
             <tr class="hover:bg-gray-50">
-              <td class="px-6 py-3 text-sm font-medium">{{ $order->order_number }}</td>
-              <td class="px-6 py-3 text-sm text-gray-600">{{ $order->user->name }}</td>
-              <td class="px-6 py-3 text-sm font-semibold">{{ $order->total_formatted }}</td>
-              <td class="px-6 py-3"><a href="{{ route('staff.payments.show',$order) }}" class="text-xs px-2 py-1 border border-gray-200 rounded-lg hover:bg-gray-50">Proses</a></td>
+              <td class="px-6 py-3 text-sm font-semibold">{{ $order->order_number }}</td>
+              <td class="px-6 py-3 text-sm text-gray-600">{{ $order->created_at->format('d M, h:i A') }}</td>
+              <td class="px-6 py-3 text-sm font-semibold text-[#111827]">Payment Verification</td>
+              <td class="px-6 py-3 text-sm text-gray-600">{{ auth()->user()->name }}</td>
+              <td class="px-6 py-3"><span class="status-pill bg-[#d1fae5] text-[#047857]">Completed</span></td>
             </tr>
-            @empty<tr><td colspan="4" class="text-center py-8 text-gray-400">Tidak ada pembayaran menunggu.</td></tr>
+            @empty<tr><td colspan="5" class="text-center py-8 text-gray-400">Tidak ada aktivitas.</td></tr>
             @endforelse
           </tbody>
         </table>
       </div>
     </main>
+  </div>
   </div>
 </div>
 @endsection

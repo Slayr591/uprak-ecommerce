@@ -1,17 +1,22 @@
 @extends('layouts.app')
 @section('title','Keranjang - UKK E-Commerce')
 @section('content')
-<div class="min-h-screen bg-gray-50">
-  <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-    <a href="{{ route('user.products') }}" class="flex items-center gap-2">
-      <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center"><svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg></div>
-      <span class="font-bold text-gray-900">UKK Store</span>
+<div class="app-viewport">
+  <div class="app-canvas !block">
+  <header class="h-16 bg-[#fcfcfd] border-b border-[#e3e6eb] px-7 flex items-center justify-between">
+    <a href="{{ route('user.products') }}" class="flex items-center gap-3">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M7 4v3m10-3v3M5 7l1 13h12l1-13"/></svg>
+      <span class="text-[30px] font-extrabold tracking-tight">MODERN SHOP</span>
     </a>
-    <a href="{{ route('user.products') }}" class="text-sm text-gray-500 hover:text-gray-900">Lanjut Belanja</a>
+    <div class="flex items-center gap-8 text-sm font-semibold">
+      <a href="{{ route('user.products') }}">New Arrivals</a>
+      <a href="{{ route('user.products') }}">Collections</a>
+      <a href="{{ route('user.products') }}">Support</a>
+    </div>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-8">
+  <main class="max-w-6xl mx-auto px-8 py-7">
     @include('partials.alert')
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Keranjang ({{ $cartItems->count() }})</h1>
+    <h1 class="text-[48px] font-extrabold tracking-tight text-[#111827] mb-5">YOUR BAG ({{ $cartItems->count() }})</h1>
     @if($cartItems->isEmpty())
       <div class="text-center py-20 bg-white rounded-2xl border border-gray-200">
         <svg class="w-16 h-16 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
@@ -19,10 +24,10 @@
         <a href="{{ route('user.products') }}" class="bg-gray-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold">Mulai Belanja</a>
       </div>
     @else
-    <div class="flex gap-6 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 items-start">
       <div class="flex-1 space-y-4">
         @foreach($cartItems as $item)
-        <div class="bg-white rounded-xl border border-gray-200 p-4 flex items-start gap-4">
+        <div class="ui-card p-4 flex items-start gap-4">
           <div class="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0">
             @if($item->product->image)<img src="{{ Storage::url($item->product->image) }}" class="w-full h-full object-cover rounded-lg">@endif
           </div>
@@ -50,20 +55,22 @@
           </form>
         </div>
       </div>
-      <div class="w-80 flex-shrink-0">
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 class="font-bold text-gray-900 mb-4">Ringkasan</h2>
+      <div class="w-full">
+        <div class="ui-card p-6">
+          <h2 class="text-[33px] font-extrabold tracking-tight text-[#111827] mb-4">ORDER SUMMARY</h2>
           <div class="space-y-3 text-sm mb-4">
             <div class="flex justify-between"><span class="text-gray-500">Subtotal</span><span class="font-medium">{{ \App\Helpers\CurrencyHelper::rupiah($subtotal) }}</span></div>
             <div class="flex justify-between"><span class="text-gray-500">Pengiriman</span><span class="text-emerald-600 font-medium">{{ $shipping > 0 ? \App\Helpers\CurrencyHelper::rupiah($shipping) : 'Gratis' }}</span></div>
             <div class="flex justify-between"><span class="text-gray-500">Pajak (11%)</span><span class="font-medium">{{ \App\Helpers\CurrencyHelper::rupiah($tax) }}</span></div>
             <div class="border-t pt-3 flex justify-between"><span class="font-bold text-gray-900">Total</span><span class="font-bold text-lg text-gray-900">{{ \App\Helpers\CurrencyHelper::rupiah($total) }}</span></div>
           </div>
-          <a href="{{ route('checkout') }}" class="block w-full bg-gray-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">Lanjut ke Checkout</a>
+          <a href="{{ route('checkout') }}" class="block w-full h-12 rounded-xl bg-black text-white text-center leading-[48px] font-bold">PROCEED TO CHECKOUT</a>
         </div>
       </div>
     </div>
     @endif
   </main>
+  <footer class="h-14 border-t border-[#e3e6eb] text-xs text-[#9aa1ad] flex items-center justify-center">© 2024 MODERN E-COMMERCE PLATFORM. ALL RIGHTS RESERVED.</footer>
+  </div>
 </div>
 @endsection

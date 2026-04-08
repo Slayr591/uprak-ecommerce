@@ -1,17 +1,18 @@
 @extends('layouts.app')
 @section('title','Riwayat Pesanan - UKK')
 @section('content')
-<div class="min-h-screen bg-gray-50">
-  <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+<div class="app-viewport">
+  <div class="app-canvas !block">
+  <header class="h-16 bg-[#fcfcfd] border-b border-[#e3e6eb] px-6 py-4 flex items-center justify-between">
     <a href="{{ route('user.products') }}" class="flex items-center gap-2">
       <div class="w-7 h-7 bg-gray-900 rounded-lg flex items-center justify-center"><svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg></div>
       <span class="font-bold text-gray-900">UKK Store</span>
     </a>
     <form method="POST" action="{{ route('logout') }}" class="inline">@csrf<button class="text-sm text-gray-500 hover:text-red-600">Keluar</button></form>
   </header>
-  <main class="max-w-4xl mx-auto px-6 py-8">
+  <main class="max-w-5xl mx-auto px-6 py-8">
     @include('partials.alert')
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Riwayat Pesanan</h1>
+    <h1 class="text-[48px] font-extrabold tracking-tight text-[#111827] mb-6">Transaction History</h1>
     @forelse($orders as $order)
     @php
       $trackingText = match($order->status) {
@@ -24,7 +25,7 @@
         default => 'Status pesanan sedang diperbarui.',
       };
     @endphp
-    <div class="bg-white rounded-xl border border-gray-200 p-5 mb-4">
+    <div class="ui-card p-5 mb-4">
       <div class="flex items-center justify-between mb-3">
         <div>
           <p class="font-semibold text-gray-900">{{ $order->order_number }}</p>
@@ -70,5 +71,6 @@
     @endforelse
     <div class="mt-4">{{ $orders->links() }}</div>
   </main>
+  </div>
 </div>
 @endsection

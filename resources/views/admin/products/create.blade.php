@@ -1,49 +1,50 @@
 @extends('layouts.app')
 @section('title', isset($product) ? 'Edit Produk' : 'Tambah Produk')
 @section('content')
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   @include('partials.admin-sidebar')
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-8 py-4 flex items-center gap-3">
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-8 py-4 flex items-center gap-3">
       <a href="{{ route('admin.products.index') }}" class="text-gray-500 hover:text-gray-900">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       </a>
-      <h2 class="text-lg font-semibold text-gray-900">{{ isset($product) ? 'Edit Produk' : 'Tambah Produk Baru' }}</h2>
+      <h2 class="text-[38px] font-extrabold tracking-tight text-gray-900">{{ isset($product) ? 'Edit Produk' : 'Tambah Produk Baru' }}</h2>
     </header>
     <main class="flex-1 overflow-y-auto p-8">
       @include('partials.alert')
       <div class="max-w-2xl">
-        <form method="POST" action="{{ isset($product) ? route('admin.products.update',$product) : route('admin.products.store') }}" enctype="multipart/form-data" class="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+        <form method="POST" action="{{ isset($product) ? route('admin.products.update',$product) : route('admin.products.store') }}" enctype="multipart/form-data" class="ui-card p-6 space-y-5">
           @csrf
           @if(isset($product)) @method('PUT') @endif
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Produk *</label>
-            <input type="text" name="name" value="{{ old('name', $product->name ?? '') }}" required class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+            <input type="text" name="name" value="{{ old('name', $product->name ?? '') }}" required class="ui-input">
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1.5">Harga (Rp) *</label>
-              <input type="number" name="price" value="{{ old('price', $product->price ?? '') }}" required min="0" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+              <input type="number" name="price" value="{{ old('price', $product->price ?? '') }}" required min="0" class="ui-input">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1.5">Stok *</label>
-              <input type="number" name="stock" value="{{ old('stock', $product->stock ?? '') }}" required min="0" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+              <input type="number" name="stock" value="{{ old('stock', $product->stock ?? '') }}" required min="0" class="ui-input">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1.5">Kategori *</label>
-              <input type="text" name="category" value="{{ old('category', $product->category ?? '') }}" list="categories" required class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+              <input type="text" name="category" value="{{ old('category', $product->category ?? '') }}" list="categories" required class="ui-input">
               <datalist id="categories">@foreach($categories as $c)<option value="{{ $c }}">@endforeach</datalist>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1.5">SKU *</label>
-              <input type="text" name="sku" value="{{ old('sku', $product->sku ?? '') }}" required class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+              <input type="text" name="sku" value="{{ old('sku', $product->sku ?? '') }}" required class="ui-input">
             </div>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Deskripsi</label>
-            <textarea name="description" rows="4" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">{{ old('description', $product->description ?? '') }}</textarea>
+            <textarea name="description" rows="4" class="ui-textarea">{{ old('description', $product->description ?? '') }}</textarea>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Gambar Produk</label>
@@ -59,12 +60,13 @@
           </div>
           @endif
           <div class="flex gap-3">
-            <button type="submit" class="bg-gray-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-800">{{ isset($product) ? 'Simpan Perubahan' : 'Tambah Produk' }}</button>
-            <a href="{{ route('admin.products.index') }}" class="border border-gray-200 text-gray-700 px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-50">Batal</a>
+            <button type="submit" class="btn-dark">{{ isset($product) ? 'Simpan Perubahan' : 'Tambah Produk' }}</button>
+            <a href="{{ route('admin.products.index') }}" class="btn-outline">Batal</a>
           </div>
         </form>
       </div>
     </main>
+  </div>
   </div>
 </div>
 @endsection

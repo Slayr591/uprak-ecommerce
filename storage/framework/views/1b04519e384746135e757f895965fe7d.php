@@ -1,12 +1,13 @@
 
 <?php $__env->startSection('title','Role & Permission - Admin'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50 overflow-hidden">
+<div class="app-viewport">
+    <div class="app-canvas">
     <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
         
-        <header class="bg-white border-b border-gray-200 px-8 h-16 flex items-center justify-between flex-shrink-0">
+        <header class="bg-[#fbfbfc] border-b border-[#dfe3e8] px-8 h-16 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center gap-2 text-sm">
                 <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-gray-400 hover:text-gray-700">Settings</a>
                 <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -49,12 +50,12 @@
                 
                 <div class="flex items-start justify-between mb-8">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Admin Permissions</h1>
+                        <h1 class="text-[50px] font-extrabold tracking-tight text-gray-900">Admin Permissions</h1>
                         <p class="text-gray-500 mt-1 max-w-xl">Define the scope of actions for the <strong><?php echo e(ucfirst($role)); ?></strong> role. These settings apply globally to all users assigned this role.</p>
                     </div>
                     <div class="flex gap-3">
-                        <a href="<?php echo e(route('admin.permissions', $role)); ?>" class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">Discard</a>
-                        <button form="permission-form" type="submit" class="px-4 py-2 bg-green-400 text-black rounded-lg text-sm font-semibold hover:bg-green-500 transition-colors">Save Changes</button>
+                        <a href="<?php echo e(route('admin.permissions', $role)); ?>" class="btn-outline !h-10">Discard</a>
+                        <button form="permission-form" type="submit" class="btn-mint !h-10">Save Changes</button>
                     </div>
                 </div>
 
@@ -62,7 +63,7 @@
                 <div class="relative mb-6">
                     <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     <input type="text" placeholder="Search permissions (e.g. Refunds, Inventory, User management)..."
-                           class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+                           class="ui-input !h-12 pl-12">
                 </div>
 
                 
@@ -79,7 +80,7 @@
                             </div>
 
                             
-                            <div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100 shadow-sm">
+                            <div class="ui-card divide-y divide-gray-100 shadow-sm">
                                 <?php $__currentLoopData = $group['permissions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $permKey => $perm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="flex items-center justify-between px-6 py-5">
                                     <div>
@@ -117,6 +118,7 @@
                 <?php endif; ?>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <?php $__env->stopSection(); ?>

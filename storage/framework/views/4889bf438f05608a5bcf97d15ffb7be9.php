@@ -1,10 +1,11 @@
 
 <?php $__env->startSection('title','Laporan - Admin'); ?>
 <?php $__env->startSection('content'); ?>
-<div class="flex h-screen bg-gray-50">
+<div class="app-viewport">
+  <div class="app-canvas">
   <?php echo $__env->make('partials.admin-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-  <div class="flex-1 flex flex-col overflow-hidden">
-    <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#f7f8fa]">
+    <header class="h-16 bg-[#fbfbfc] border-b border-[#dfe3e8] px-6 py-4 flex items-center justify-between">
       <nav class="flex items-center gap-6 text-sm">
         <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-gray-500 hover:text-gray-900">Dashboard</a>
         <a href="<?php echo e(route('admin.orders.index')); ?>" class="text-gray-500 hover:text-gray-900">Orders</a>
@@ -20,7 +21,7 @@
           <input type="hidden" name="month" value="<?php echo e($selectedMonth->format('Y-m')); ?>">
           <?php endif; ?>
           <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <input type="text" name="search" value="<?php echo e($search ?? request('search')); ?>" placeholder="Cari produk, pelanggan, pembayaran..." class="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-sm w-64 focus:outline-none">
+          <input type="text" name="search" value="<?php echo e($search ?? request('search')); ?>" placeholder="Cari produk, pelanggan, pembayaran..." class="ui-input pl-10 w-72">
         </form>
         <button class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center relative">
           <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.31 2.31 0 0118 14.235V11a6 6 0 10-12 0v3.235c0 .628-.134 1.219-.401 1.76L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
@@ -37,7 +38,7 @@
         </div>
         <div class="flex items-start justify-between">
           <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Reports Overview</h1>
+            <h1 class="text-[52px] font-extrabold tracking-tight text-gray-900 mb-2">Reports Overview</h1>
             <p class="text-gray-500 max-w-md">Comprehensive insights into your platform's financial performance, inventory health, and transaction history.</p>
           </div>
           <form method="GET" class="flex items-center gap-3">
@@ -53,8 +54,8 @@
         </div>
       </div>
       
-      <div class="grid grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+      <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="ui-card p-6">
           <p class="text-xs font-medium text-gray-500 uppercase mb-1">Total Revenue</p>
           <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e(\App\Helpers\CurrencyHelper::rupiah($stats['revenue_month'])); ?></p>
           <p class="text-xs text-green-500 flex items-center gap-1">
@@ -62,7 +63,7 @@
             <?php echo e($stats['revenue_growth'] >= 0 ? '+' : ''); ?><?php echo e($stats['revenue_growth']); ?>% vs last month
           </p>
         </div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <p class="text-xs font-medium text-gray-500 uppercase mb-1">Low Stock Items</p>
           <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e($stats['low_stock']); ?></p>
           <p class="text-xs text-red-500 flex items-center gap-1">
@@ -71,7 +72,7 @@
 
           </p>
         </div>
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <div class="ui-card p-6">
           <p class="text-xs font-medium text-gray-500 uppercase mb-1">New Customers</p>
           <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e($stats['new_users_month']); ?></p>
           <p class="text-xs text-green-500 flex items-center gap-1">
@@ -79,7 +80,7 @@
             <?php echo e($stats['new_users_growth'] >= 0 ? '+' : ''); ?><?php echo e($stats['new_users_growth']); ?>% vs last month
           </p>
         </div>
-        <div class="bg-green-100 rounded-xl border border-green-200 p-6">
+        <div class="rounded-xl border border-[#86efac] bg-[#b7f7cf] p-6">
           <p class="text-xs font-medium text-green-700 uppercase mb-1">Current Conversion</p>
           <p class="text-2xl font-bold text-gray-900 mb-1"><?php echo e(number_format($stats['conversion_rate'], 2)); ?>%</p>
           <p class="text-xs text-green-600 flex items-center gap-1">
@@ -88,7 +89,7 @@
           </p>
         </div>
       </div>
-      <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="ui-card overflow-hidden">
         <div class="px-6 py-4 border-b flex items-center justify-between">
           <h3 class="font-semibold">Daftar Transaksi</h3>
           <form method="GET" class="flex items-center gap-2">
@@ -107,7 +108,7 @@
           </form>
         </div>
         <table class="w-full">
-          <thead><tr class="bg-gray-50 text-xs font-semibold text-gray-500 uppercase">
+          <thead><tr class="bg-[#f7f8fa] text-xs font-extrabold text-gray-500 uppercase">
             <th class="text-left px-6 py-3">Produk</th><th class="text-left px-6 py-3">Pelanggan</th>
             <th class="text-left px-6 py-3">Total</th><th class="text-left px-6 py-3">Metode Bayar</th>
             <th class="text-left px-6 py-3">Status</th><th class="text-left px-6 py-3">Tanggal</th>
@@ -138,6 +139,7 @@
         <div class="px-6 py-4 border-t"><?php echo e($orders->withQueryString()->links()); ?></div>
       </div>
     </main>
+  </div>
   </div>
 </div>
 <?php $__env->stopSection(); ?>
