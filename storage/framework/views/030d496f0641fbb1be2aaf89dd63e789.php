@@ -15,14 +15,20 @@
       <nav class="flex items-center gap-6 text-sm">
         <a href="<?php echo e(route('user.products')); ?>" class="text-gray-900 font-medium">Home</a>
         <a href="<?php echo e(route('user.history')); ?>" class="text-gray-600 hover:text-gray-900">History</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Account</a>
+        <a href="<?php echo e(route('user.profile')); ?>" class="text-gray-600 hover:text-gray-900">Account</a>
       </nav>
       <?php if(auth()->guard()->check()): ?>
         <a href="<?php echo e(route('cart')); ?>" class="relative p-2 text-gray-600 hover:text-gray-900">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
           <?php if(($cartCount ?? 0) > 0): ?><span class="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-xs rounded-full flex items-center justify-center"><?php echo e($cartCount); ?></span><?php endif; ?>
         </a>
-        <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center"></div>
+        <a href="<?php echo e(route('user.profile')); ?>" class="block">
+          <?php if(auth()->user()->profile_photo_url): ?>
+            <img src="<?php echo e(auth()->user()->profile_photo_url); ?>" alt="<?php echo e(auth()->user()->name); ?>" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+          <?php else: ?>
+            <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center text-xs font-bold text-gray-800"><?php echo e(strtoupper(substr(auth()->user()->name,0,1))); ?></div>
+          <?php endif; ?>
+        </a>
       <?php else: ?>
         <a href="<?php echo e(route('login')); ?>" class="text-sm text-gray-600 hover:text-gray-900">Masuk</a>
         <a href="<?php echo e(route('register')); ?>" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-black text-white hover:bg-gray-800">Join</a>
@@ -58,17 +64,11 @@
         <?php elseif($product->isLowStock()): ?>
           <span class="absolute top-2 left-2 bg-amber-500 text-white text-xs px-2 py-1 rounded-full">Stok Terbatas</span>
         <?php endif; ?>
-        <?php if(!$product->isOutOfStock()): ?>
-          <?php if(auth()->guard()->check()): ?>
+            <?php if(!$product->isOutOfStock()): ?>
             <form method="POST" action="<?php echo e(route('cart.add')); ?>" class="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
               <?php echo csrf_field(); ?><input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
-              <button class="w-full bg-gray-900 text-white text-xs font-semibold py-2 rounded-xl shadow">+ Keranjang</button>
+              <button class="w-full bg-black text-white text-xs font-semibold py-2 rounded-xl shadow">+ Keranjang</button>
             </form>
-          <?php else: ?>
-            <div class="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <a href="<?php echo e(route('login')); ?>" class="block w-full bg-gray-900 text-white text-xs font-semibold py-2 rounded-xl shadow text-center">Login / Register untuk Beli</a>
-            </div>
-          <?php endif; ?>
         <?php endif; ?>
       </div>
       <div class="p-4">

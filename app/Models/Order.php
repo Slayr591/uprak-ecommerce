@@ -25,6 +25,7 @@ class Order extends Model
 
     public function user()        { return $this->belongsTo(User::class); }
     public function items()       { return $this->hasMany(OrderItem::class); }
+    public function orderItems()  { return $this->hasMany(OrderItem::class); }
     public function confirmedBy() { return $this->belongsTo(User::class, 'confirmed_by'); }
 
     public function getTotalFormattedAttribute(): string

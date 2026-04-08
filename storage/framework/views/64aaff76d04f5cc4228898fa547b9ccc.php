@@ -13,7 +13,8 @@
     </div>
     <a href="<?php echo e(route('user.history')); ?>" class="block w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 mb-3">Lihat Riwayat Transaksi</a>
     <a href="<?php echo e(route('user.products')); ?>" class="block w-full border border-gray-200 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-50">Kembali ke Beranda</a>
-    <p class="text-xs text-gray-400 mt-4">Butuh bantuan? <a href="#" class="text-gray-900 font-medium">Hubungi Support</a></p>
+    <?php ($waLink = config('app.customer_service_whatsapp')); ?>
+    <p class="text-xs text-gray-400 mt-4">Butuh bantuan? <a href="<?php echo e($waLink ?: route('user.products')); ?>" <?php echo e($waLink ? 'target=_blank rel=noopener noreferrer' : ''); ?> class="text-gray-900 font-medium">Hubungi Support</a></p>
   </div>
 </div>
 <?php $__env->stopSection(); ?>

@@ -13,6 +13,14 @@
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
           @if(($cartCount ?? 0) > 0)<span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">{{ $cartCount }}</span>@endif
         </a>
+        <a href="{{ route('user.profile') }}" class="text-sm text-gray-600 hover:text-gray-900">Account</a>
+        <a href="{{ route('user.profile') }}" class="block">
+          @if(auth()->user()->profile_photo_url)
+            <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+          @else
+            <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center text-xs font-bold text-gray-800">{{ strtoupper(substr(auth()->user()->name,0,1)) }}</div>
+          @endif
+        </a>
         <form method="POST" action="{{ route('logout') }}" class="inline">@csrf<button class="text-sm text-gray-500 hover:text-red-600">Keluar</button></form>
       @else
         <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">Masuk</a>

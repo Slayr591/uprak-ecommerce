@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -57,6 +58,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/history',          [UserOrderController::class, 'index'])->name('user.history');
     Route::get('/history/{order}',  [UserOrderController::class, 'show'])->name('user.history.show');
     Route::patch('/history/{order}/complete', [UserOrderController::class, 'complete'])->name('user.history.complete');
+
+    // Profile
+    Route::get('/account', [ProfileController::class, 'edit'])->name('user.profile');
+    Route::patch('/account', [ProfileController::class, 'updateProfile'])->name('user.profile.update');
+    Route::patch('/account/password', [ProfileController::class, 'updatePassword'])->name('user.profile.password');
 });
 
 // ─── ADMIN (role: admin) ──────────────────────────────────────────────────────

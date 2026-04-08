@@ -16,14 +16,20 @@
       <nav class="flex items-center gap-6 text-sm">
         <a href="{{ route('user.products') }}" class="text-gray-900 font-medium">Home</a>
         <a href="{{ route('user.history') }}" class="text-gray-600 hover:text-gray-900">History</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Account</a>
+        <a href="{{ route('user.profile') }}" class="text-gray-600 hover:text-gray-900">Account</a>
       </nav>
       @auth
         <a href="{{ route('cart') }}" class="relative p-2 text-gray-600 hover:text-gray-900">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 7H4l1-7z"/></svg>
           @if(($cartCount ?? 0) > 0)<span class="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-xs rounded-full flex items-center justify-center">{{ $cartCount }}</span>@endif
         </a>
-        <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center"></div>
+        <a href="{{ route('user.profile') }}" class="block">
+          @if(auth()->user()->profile_photo_url)
+            <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+          @else
+            <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center text-xs font-bold text-gray-800">{{ strtoupper(substr(auth()->user()->name,0,1)) }}</div>
+          @endif
+        </a>
       @else
         <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">Masuk</a>
         <a href="{{ route('register') }}" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-black text-white hover:bg-gray-800">Join</a>
