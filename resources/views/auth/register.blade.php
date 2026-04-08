@@ -1,19 +1,36 @@
 @extends('layouts.app')
 @section('title','Daftar - UKK E-Commerce')
 @section('content')
-<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-900 rounded-xl mb-4">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+@php($redirectTarget = old('redirect', request('redirect', $backUrl ?? route('user.products'))))
+<div class="min-h-screen bg-gray-50">
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+                <span class="font-bold">Store</span>
             </div>
-            <h1 class="text-2xl font-bold text-gray-900">Buat Akun</h1>
-            <p class="text-gray-500 text-sm mt-1">Daftar untuk mulai berbelanja</p>
+            <nav class="flex items-center gap-6 text-sm">
+                <a href="{{ route('user.products') }}" class="text-gray-600 hover:text-gray-900">Katalog</a>
+                <a href="{{ route('user.products') }}" class="text-gray-600 hover:text-gray-900">Support</a>
+            </nav>
         </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+    </header>
+
+    <main class="min-h-[calc(100vh-73px)] flex items-center justify-center p-4 py-10">
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-900 rounded-xl mb-4">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-900">Buat Akun</h1>
+                <p class="text-gray-500 text-sm mt-1">Daftar untuk mulai berbelanja</p>
+            </div>
+
             @include('partials.alert')
+
             <form method="POST" action="{{ route('register') }}" class="space-y-5">
                 @csrf
+                <input type="hidden" name="redirect" value="{{ $redirectTarget }}">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Lengkap</label>
                     <input type="text" name="name" value="{{ old('name') }}" required
@@ -48,10 +65,11 @@
                     Buat Akun
                 </button>
             </form>
+
             <p class="text-center text-sm text-gray-500 mt-6">
-                Sudah punya akun? <a href="{{ route('login') }}" class="text-gray-900 font-semibold hover:underline">Masuk</a>
+                Sudah punya akun? <a href="{{ route('login', ['redirect' => $redirectTarget]) }}" class="text-gray-900 font-semibold hover:underline">Masuk</a>
             </p>
         </div>
-    </div>
+    </main>
 </div>
 @endsection

@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title','Pembayaran Berhasil - UKK'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">

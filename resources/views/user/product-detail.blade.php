@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', $product->name . ' - UKK')
 @section('content')
+@php($redirectTarget = request()->fullUrl())
 <div class="min-h-screen bg-white">
   <header class="border-b border-gray-100 bg-white px-6 py-4 flex items-center gap-4">
     <a href="{{ route('user.products') }}" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm">
@@ -23,8 +24,8 @@
         </a>
         <form method="POST" action="{{ route('logout') }}" class="inline">@csrf<button class="text-sm text-gray-500 hover:text-red-600">Keluar</button></form>
       @else
-        <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">Masuk</a>
-        <a href="{{ route('register') }}" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-900 text-white hover:bg-gray-800">Daftar</a>
+        <a href="{{ route('login', ['redirect' => $redirectTarget]) }}" class="text-sm text-gray-600 hover:text-gray-900">Masuk</a>
+        <a href="{{ route('register', ['redirect' => $redirectTarget]) }}" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-900 text-white hover:bg-gray-800">Daftar</a>
       @endauth
     </div>
   </header>
@@ -61,8 +62,8 @@
             <div class="space-y-3">
               <p class="text-sm text-gray-600">Untuk membeli produk ini, silakan login atau daftar terlebih dahulu.</p>
               <div class="flex gap-3">
-                <a href="{{ route('login') }}" class="flex-1 text-center bg-gray-900 text-white py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-colors">Login</a>
-                <a href="{{ route('register') }}" class="flex-1 text-center border border-gray-300 text-gray-700 py-2.5 rounded-xl font-semibold hover:bg-gray-50 transition-colors">Register</a>
+                <a href="{{ route('login', ['redirect' => $redirectTarget]) }}" class="flex-1 text-center bg-gray-900 text-white py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-colors">Login</a>
+                <a href="{{ route('register', ['redirect' => $redirectTarget]) }}" class="flex-1 text-center border border-gray-300 text-gray-700 py-2.5 rounded-xl font-semibold hover:bg-gray-50 transition-colors">Register</a>
               </div>
             </div>
           @endauth

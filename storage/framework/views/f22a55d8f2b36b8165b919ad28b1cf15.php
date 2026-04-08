@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title','Laporan - Admin'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="flex h-screen bg-gray-50">
